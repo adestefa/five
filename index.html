@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>5000 Weeks</title>
+    <meta name="description" content="5000 weeks, a journey to the panic monster">
+    <meta name="author" content="Anthony.Destefano@gmail.com">
+    <style>
+    #wrap {
+        padding:15px;
+       
+    }
+    #out {
+        
+    }
+    .box {
+        border: 1px solid black;
+        width: 10px;
+        height: 10px;
+        float:left;
+        position:relative;
+        margin: 1px;
+    }
+    .box-fill {
+        border: 1px solid black;
+        background-color:yellow;
+        color:white;
+        font-weight:600;
+        font-size:8px;
+        width: 10px;
+        height: 10px;
+        float:left;
+        position:relative;
+        margin: 1px;
+    }
+    </style>
+    <script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
+</head>
+    <body>
+        <div id="wrap">
+            <h1>5000 weeks - A journey to the <a style="text-decoration:none" target="_blank" href="https://www.ted.com/talks/tim_urban_inside_the_mind_of_a_master_procrastinator?language=en">Panic Monster</a> </h1>
+            <span>Each box represents a week of a 96 year life.</span>
+            <br /><br />
+            <form  onsubmit="fillInAge(jQuery('#age').val());return false;">How old are you? <input type="text" id="age" value="" /> <input type="submit" id="btn" value="Send" /></form>
+              
+             <p id="display" style="display:none">Weeks used:<span id="weeksUsed"></span> /  Weeks left:<span id="weeksLeft"></span><br /><br />Do that thing you have been putting off!<p>
+             <div id="out"></div>
+             <br /><br /><p></p>
+        </div>
+        <script>
+        var t = jQuery('#out');
+        var weeksLeft = 0;
+        var weeksUsed = 0;
+        for(i=0;i<5000;i++) {
+            t.append("<div class='box'></div>");
+        }
+        function fillInAge(age) {
+            var isnum = /^\d+$/.test(age);
+            if (!isnum || age > 96) {
+                alert("Numbers between 1 and 96 only please.");
+            } else {
+            weeksLeft = 0;
+            weeksUsed = 0;
+            jQuery('#out').html("");
+            var weeks = (age*52); // 52 weeks in a year
+            for(i=0;i<5000;i++) {
+                if(i < weeks) {
+                    t.append("<div class='box-fill'>X</div>");
+                    weeksUsed++;
+                }else{
+                    t.append("<div class='box'></div>");
+                    weeksLeft++;
+                }
+            }
+            jQuery("#weeksUsed").html("<b>" + weeksUsed + "</b>");
+            jQuery("#weeksLeft").html("<b>" + weeksLeft + "</b>");
+            jQuery('#display').slideDown("slow");
+            }
+        }
+        </script>
+    </body>
+</html>
